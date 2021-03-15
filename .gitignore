@@ -1,0 +1,4 @@
+.vscode/
+bin/
+postgres-data/
+src/debug
