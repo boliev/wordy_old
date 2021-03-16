@@ -14,7 +14,7 @@ import (
 
 // InitializeUserController for controller.CreateUserController
 func InitializeUserController() (controller.User, error) {
-	wire.Build(controller.CreateUserController, postgre.NewUserRepository, postgre.NewDBConnection)
+	wire.Build(controller.CreateUserController, InitializeUserRepository)
 	return controller.User{}, nil
 }
 

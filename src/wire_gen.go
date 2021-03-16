@@ -15,11 +15,10 @@ import (
 
 // InitializeUserController for controller.CreateUserController
 func InitializeUserController() (controller.User, error) {
-	db, err := postgre.NewDBConnection()
+	userRepository, err := InitializeUserRepository()
 	if err != nil {
 		return controller.User{}, err
 	}
-	userRepository := postgre.NewUserRepository(db)
 	user := controller.CreateUserController(userRepository)
 	return user, nil
 }
