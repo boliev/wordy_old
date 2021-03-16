@@ -2,7 +2,6 @@ package controller
 
 import (
 	"net/http"
-	"wordy/src/postgre"
 	"wordy/src/request"
 	"wordy/src/response"
 	"wordy/src/user"
@@ -13,11 +12,10 @@ import (
 // User Controller struct
 type User struct {
 	repository user.Repository
-	// repository postgre.UserRepository
 }
 
 // CreateUserController Constructor
-func CreateUserController(repository postgre.UserRepository) User {
+func CreateUserController(repository user.Repository) User {
 	return User{
 		repository: repository,
 	}

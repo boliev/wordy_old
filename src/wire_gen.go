@@ -9,28 +9,29 @@ import (
 	"gorm.io/gorm"
 	"wordy/src/controller"
 	"wordy/src/postgre"
+	"wordy/src/user"
 )
 
 // Injectors from wire.go:
 
 // InitializeUserController for controller.CreateUserController
 func InitializeUserController() (controller.User, error) {
-	userRepository, err := InitializeUserRepository()
+	repository, err := InitializeUserRepository()
 	if err != nil {
 		return controller.User{}, err
 	}
-	user := controller.CreateUserController(userRepository)
+	user := controller.CreateUserController(repository)
 	return user, nil
 }
 
 // InitializeUserRepository wire for postgre.NewUserRepository
-func InitializeUserRepository() (postgre.UserRepository, error) {
+func InitializeUserRepository() (user.Repository, error) {
 	db, err := InitializeDBConnection()
 	if err != nil {
-		return postgre.UserRepository{}, err
+		return nil, err
 	}
-	userRepository := postgre.NewUserRepository(db)
-	return userRepository, nil
+	repository := postgre.NewUserRepository(db)
+	return repository, nil
 }
 
 // InitializeDBConnection wire for postgre.NewDBConnection

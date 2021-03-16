@@ -5,12 +5,14 @@ package main
 import (
 	"wordy/src/controller"
 	"wordy/src/postgre"
+	"wordy/src/user"
 
 	"github.com/google/wire"
 	"gorm.io/gorm"
 )
 
 // controllers
+// Не получается использовать интерфейсы
 
 // InitializeUserController for controller.CreateUserController
 func InitializeUserController() (controller.User, error) {
@@ -19,7 +21,7 @@ func InitializeUserController() (controller.User, error) {
 }
 
 // InitializeUserRepository wire for postgre.NewUserRepository
-func InitializeUserRepository() (postgre.UserRepository, error) {
+func InitializeUserRepository() (user.Repository, error) {
 	wire.Build(postgre.NewUserRepository, InitializeDBConnection)
 	return postgre.UserRepository{}, nil
 }
