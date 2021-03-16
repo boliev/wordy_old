@@ -20,7 +20,7 @@ func InitializeUserController() (controller.User, error) {
 
 // InitializeUserRepository wire for postgre.NewUserRepository
 func InitializeUserRepository() (postgre.UserRepository, error) {
-	wire.Build(postgre.NewUserRepository, postgre.NewDBConnection)
+	wire.Build(postgre.NewUserRepository, InitializeDBConnection)
 	return postgre.UserRepository{}, nil
 }
 
