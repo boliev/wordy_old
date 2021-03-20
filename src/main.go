@@ -1,17 +1,16 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 )
 
 func main() {
-	// dsn := "host=localhost user=wordy password=123456 dbname=wordy port=5433 sslmode=disable TimeZone=Europe/Moscow"
-	// db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	// if err != nil {
-	// 	panic("Cannot connect to the database")
-	// }
-	// db.AutoMigrate(&user.User{})
-
+	NewConfig()
+	var dbConnection = viper.GetString("database")
+	fmt.Print(dbConnection)
 	r := gin.Default()
 	user, err := InitializeUserController()
 	if err != nil {

@@ -11,8 +11,9 @@ import (
 	"gorm.io/gorm"
 )
 
+// Parameters
+
 // controllers
-// Не получается использовать интерфейсы
 
 // InitializeUserController for controller.CreateUserController
 func InitializeUserController() (controller.User, error) {
@@ -28,6 +29,6 @@ func InitializeUserRepository() (user.Repository, error) {
 
 // InitializeDBConnection wire for postgre.NewDBConnection
 func InitializeDBConnection() (*gorm.DB, error) {
-	wire.Build(postgre.NewDBConnection)
+	wire.Build(postgre.NewDBConnection, "host=localhost user=wordy password=123456 dbname=wordy port=5433 sslmode=disable TimeZone=Europe/Moscow")
 	return &gorm.DB{}, nil
 }
