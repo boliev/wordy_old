@@ -6,6 +6,7 @@
 package main
 
 import (
+	"github.com/spf13/viper"
 	"gorm.io/gorm"
 	"wordy/src/controller"
 	"wordy/src/postgre"
@@ -36,9 +37,18 @@ func InitializeUserRepository() (user.Repository, error) {
 
 // InitializeDBConnection wire for postgre.NewDBConnection
 func InitializeDBConnection() (*gorm.DB, error) {
-	db, err := postgre.NewDBConnection()
+	string2 := ParameterDbConnection()
+	db, err := postgre.NewDBConnection(string2)
 	if err != nil {
 		return nil, err
 	}
 	return db, nil
+}
+
+// wire.go:
+
+// Parameters
+// InitializeDBDsn wire for db dsn
+func ParameterDbConnection() string {
+	return viper.GetString("database_host")
 }

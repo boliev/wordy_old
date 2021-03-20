@@ -8,10 +8,15 @@ import (
 	"wordy/src/user"
 
 	"github.com/google/wire"
+	"github.com/spf13/viper"
 	"gorm.io/gorm"
 )
 
 // Parameters
+// ParameterDbConnection wire for db dsn
+func ParameterDbConnection() string {
+	return viper.GetString("database_host")
+}
 
 // controllers
 
@@ -29,6 +34,6 @@ func InitializeUserRepository() (user.Repository, error) {
 
 // InitializeDBConnection wire for postgre.NewDBConnection
 func InitializeDBConnection() (*gorm.DB, error) {
-	wire.Build(postgre.NewDBConnection, "host=localhost user=wordy password=123456 dbname=wordy port=5433 sslmode=disable TimeZone=Europe/Moscow")
+	wire.Build(postgre.NewDBConnection, ParameterDbConnection)
 	return &gorm.DB{}, nil
 }
