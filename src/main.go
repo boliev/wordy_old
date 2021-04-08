@@ -10,10 +10,10 @@ import (
 
 func main() {
 	NewConfig()
-	d := viper.Get("database_host")
-	d1 := viper.Get("database_host1")
+	NewRouting()
+}
 
-	fmt.Println(d, d1)
+func NewRouting() {
 	r := gin.Default()
 	user, err := InitializeUserController()
 	if err != nil {
